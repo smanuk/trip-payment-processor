@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TapsFileReaderTest {
 
-    private final String test_file1 = "test_file1.csv";
+    private final String test_file1 = "test_complete1.csv";
     private TapsFileReader cut;
     private TapsInput tapsInput;
 
