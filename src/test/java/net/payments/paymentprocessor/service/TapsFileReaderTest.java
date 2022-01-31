@@ -10,8 +10,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TapsFileReaderTest {
 
@@ -50,7 +49,23 @@ public class TapsFileReaderTest {
         assertEquals(2, actual.size());
     }
 
-    
+    @Test
+    void tapsFileReaderTest_imported_data_correct() {
+
+        List<TapsInput> actual = cut.processFile().getTapsInputList();
+
+        TapsInput input = actual.get(0);
+        assertAll("Row 1 data points",
+                () -> assertEquals("1", input.getId()),
+                () -> assertEquals(getZdt("22-01-2018 13:00:00"), input.getTapTime()),
+                () -> assertEquals(TapType.ON, input.getTapType()),
+                () -> assertEquals("Stop1", input.getStopId()),
+                () -> assertEquals("Company1", input.getCompanyId()),
+                () -> assertEquals("Bus37", input.getBusId()),
+                () -> assertEquals("5500005555555559", input.getPan())
+        );
+    }
+
     private void setupData() {
 
         tapsInput = TapsInput.builder()
