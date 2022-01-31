@@ -37,14 +37,13 @@ public class TapMapper {
         TripsOutput.TripsOutputBuilder builder = TripsOutput.builder()
                 .started(start.getTapTime())
                 .fromStopId(start.getStopId())
-                .toStopId(start.getStopId())
                 .companyId(start.getCompanyId())
                 .busId(start.getBusId())
                 .pan(start.getPan())
                 .status(status);
 
                 if (stop.isPresent()){
-
+                    builder.toStopId(stop.get().getStopId());
                     builder.finished(stop.get().getTapTime());
                     builder.duractionSecs((int)ChronoUnit.SECONDS.between(start.getTapTime(), stop.get().getTapTime()));
                     builder.chargeAmountCents(priceService.getPrice(start.getStopId(), stop.get().getStopId()));
