@@ -19,5 +19,24 @@ public class PaymentProcessingService {
     public List<TripsOutput> processTrips(List<TapsInput> taps) {
 
         return Collections.EMPTY_LIST;
+    private Map<String, List<TapsInput>> mapCustomers(List<TapsInput> taps) {
+
+        Map<String, List<TapsInput>> customerMap = new HashMap<>();
+
+        for (TapsInput tap : taps) {
+
+            String pan = tap.getPan();
+            if (customerMap.containsKey(pan)) {
+
+                customerMap.get(pan).add(tap);
+            }
+            else {
+                List<TapsInput> newCustomer = new ArrayList<>();
+                newCustomer.add(tap);
+                customerMap.put(pan, newCustomer);
+            }
+        }
+
+        return customerMap;
     }
 }
