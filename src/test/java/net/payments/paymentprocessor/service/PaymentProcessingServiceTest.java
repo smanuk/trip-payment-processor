@@ -90,6 +90,27 @@ public class PaymentProcessingServiceTest {
         assertEquals(550, actual.get(0).getChargeAmountCents());
     }
 
+    @Test
+    void processTrips_cancelled_duration() {
+
+        List<TripsOutput> actual = cut.processTrips(inputCanelled1);
+        assertEquals(60, actual.get(0).getDuractionSecs());
+    }
+
+    @Test
+    void processTrips_complete_duration() {
+
+        List<TripsOutput> actual = cut.processTrips(inputComplete1);
+        assertEquals(60*5, actual.get(0).getDuractionSecs());
+    }
+
+    @Test
+    void processTrips_incomplete_duration() {
+
+        List<TripsOutput> actual = cut.processTrips(inputIncomplete1);
+        assertEquals(0, actual.get(0).getDuractionSecs());
+    }
+
     private static void setupData() {
 
         inputComplete1 = loadCSV(TEST_COMPLETE_1_CSV);
