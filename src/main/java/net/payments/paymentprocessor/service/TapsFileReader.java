@@ -29,6 +29,13 @@ public class TapsFileReader {
 
         return this;
     }
+    private ZonedDateTime getZdt(String stringDate) {
+
+        return ZonedDateTime.parse(stringDate,
+                DateTimeFormatter.ofPattern(FORMAT)
+                        .withZone(ZoneOffset.UTC));
+    }
+
     private Reader loadfile() throws Exception {
 
         return Files.newBufferedReader(Paths.get(
