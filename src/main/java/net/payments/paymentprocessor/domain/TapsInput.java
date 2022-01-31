@@ -1,5 +1,6 @@
 package net.payments.paymentprocessor.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +8,7 @@ import java.time.ZonedDateTime;
 
 @Getter
 @Setter
+@Builder
 public class TapsInput {
 
     String id;
