@@ -7,15 +7,14 @@ import lombok.Setter;
 import java.time.ZonedDateTime;
 
 @Getter
-@Setter
 @Builder
 public class TapsInput {
 
-    String id;
-    ZonedDateTime tapTime;
-    TapType tapType;
-    String stopId;
-    String companyId;
-    String busId;
-    String pan;
+    final String id;
+    final ZonedDateTime tapTime;
+    final TapType tapType;
+    final String stopId;
+    final String companyId;
+    final String busId;
+    final String pan;
 }
