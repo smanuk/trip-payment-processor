@@ -31,8 +31,44 @@ public class PaymentProcessingService {
         return output;
     }
 
+
+    // Needs refactoring
+    // Am not really happy with how this looks.
     public List<TripsOutput> processCustomerTaps(List<TapsInput> customerTaps) {
+
+        Stack<TapsInput> tapsStack = new Stack<>();
         List<TripsOutput> result = new ArrayList<>();
+
+        for (TapsInput tap : customerTaps) {
+
+            TapType type = tap.getTapType();
+            if (type.equals(TapType.ON)) {
+
+                // is ther one on the stack already?
+                //  Check for incomplete
+                if (!tapsStack.empty()) {
+                    result.add(tapMapper.incomplete(tapsStack.pop()));
+                }
+
+                tapsStack.push(tap);
+            }
+            else {
+
+                // cancelled
+                if (tapsStack.peek().getStopId().equals(tap.getStopId())) {
+                    result.add(tapMapper.cancelled(tapsStack.pop(), tap));
+                    continue;
+                }
+
+                result.add(tapMapper.complete(tapsStack.pop(), tap));
+            }
+        }
+
+        // There could be one left on the stack if there are no more taps
+        if (!tapsStack.empty()) {
+            result.add(tapMapper.incomplete(tapsStack.pop()));
+        }
+
         return result;
     }
 
