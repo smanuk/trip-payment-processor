@@ -45,6 +45,11 @@ public class TapsFileReader {
 
         return this;
     }
+    private TapType getTapType(String tapName) {
+
+        return TapType.valueOf(tapName);
+    }
+
     private ZonedDateTime getZdt(String stringDate) {
 
         return ZonedDateTime.parse(stringDate,
