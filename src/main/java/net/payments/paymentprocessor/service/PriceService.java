@@ -38,6 +38,10 @@ public class PriceService {
     // PRE: both stop and start need to be supplied
     public int getPrice(String start, String stop) {
 
+        if (start.equals(stop)) {
+            return 0;
+        }
+
         return prices.get(start).get(stop);
     }
 

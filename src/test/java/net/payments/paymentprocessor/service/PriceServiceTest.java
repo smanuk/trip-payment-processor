@@ -78,4 +78,11 @@ public class PriceServiceTest {
         int price = cut.getMax(PriceService.STOP3);
         assertEquals(730, price);
     }
+
+    @Test
+    void getPrice_same_stop() {
+
+        int price = cut.getPrice(PriceService.STOP1, PriceService.STOP1);
+        assertEquals(0, price);
+    }
 }
