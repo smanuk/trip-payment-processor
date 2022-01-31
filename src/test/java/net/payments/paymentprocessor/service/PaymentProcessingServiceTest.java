@@ -65,6 +65,31 @@ public class PaymentProcessingServiceTest {
         assertEquals(TripStatus.CANCELLED,actual.get(0).getStatus());
     }
 
+    @Test
+    void processTrips_cancelled_trip_price() {
+
+        List<TripsOutput> actual = cut.processTrips(inputCanelled1);
+        assertEquals(0, actual.get(0).getChargeAmountCents());
+    }
+
+    @Test
+    void processTrips_complete_trip_price() {
+
+        List<TripsOutput> actual = cut.processTrips(inputComplete1);
+
+        // if we had a price service we could use this to look up the expected price
+        assertEquals(325, actual.get(0).getChargeAmountCents());
+    }
+
+    @Test
+    void processTrips_incomplete_trip_price() {
+
+        List<TripsOutput> actual = cut.processTrips(inputIncomplete1);
+
+        // if we had a price service we could use this to look up the expected price
+        assertEquals(550, actual.get(0).getChargeAmountCents());
+    }
+
     private static void setupData() {
 
         inputComplete1 = loadCSV(TEST_COMPLETE_1_CSV);
