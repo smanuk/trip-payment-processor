@@ -29,4 +29,9 @@ public class TapsFileReader {
 
         return this;
     }
+    private Reader loadfile() throws Exception {
+
+        return Files.newBufferedReader(Paths.get(
+                ClassLoader.getSystemResource(filename).toURI()));
+    }
 }
