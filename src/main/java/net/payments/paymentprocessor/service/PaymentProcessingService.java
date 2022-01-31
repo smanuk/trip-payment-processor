@@ -18,7 +18,24 @@ public class PaymentProcessingService {
     
     public List<TripsOutput> processTrips(List<TapsInput> taps) {
 
-        return Collections.EMPTY_LIST;
+        List<TripsOutput> output =  new ArrayList<>();
+
+        // by splitting into a hash of customers you could split the processing into multiple threads
+        Map<String, List<TapsInput>> mapCustomerTaps = mapCustomers(taps);
+        for (List<TapsInput> customerTaps : mapCustomerTaps.values()) {
+
+            output.addAll(processCustomerTaps(customerTaps));
+
+        }
+
+        return output;
+    }
+
+    public List<TripsOutput> processCustomerTaps(List<TapsInput> customerTaps) {
+        List<TripsOutput> result = new ArrayList<>();
+        return result;
+    }
+
     private Map<String, List<TapsInput>> mapCustomers(List<TapsInput> taps) {
 
         Map<String, List<TapsInput>> customerMap = new HashMap<>();
