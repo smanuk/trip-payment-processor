@@ -41,7 +41,7 @@ public class PaymentProcessingServiceTest {
 
 
     @Test
-    void PaymentProcessingServiceTest_one_complete_trip() {
+    void processTrips_one_complete_trip() {
 
         List<TripsOutput> actual = cut.processTrips(inputComplete1);
 
@@ -50,7 +50,7 @@ public class PaymentProcessingServiceTest {
     }
 
     @Test
-    void PaymentProcessingServiceTest_incomplete_price_max() {
+    void processTrips_one_incomplete_trip() {
 
         List<TripsOutput> actual = cut.processTrips(inputIncomplete1);
         assertEquals(1, actual.size());
@@ -58,7 +58,7 @@ public class PaymentProcessingServiceTest {
     }
 
     @Test
-    void PaymentProcessingServiceTest_one_cancelled_price() {
+    void processTrips_one_cancelled_trip() {
 
         List<TripsOutput> actual = cut.processTrips(inputCanelled1);
         assertEquals(1, actual.size());
