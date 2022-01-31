@@ -22,7 +22,7 @@ public class TapsFileReader {
 
     public List<TapsInput> getTapsInputList() {
 
-        return tapsInputList;
+        return Collections.unmodifiableList(tapsInputList);
     }
 
     public TapsFileReader processFile() {
