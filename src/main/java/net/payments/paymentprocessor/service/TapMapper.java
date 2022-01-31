@@ -46,12 +46,13 @@ public class TapMapper {
                 if (stop.isPresent()){
 
                     builder.finished(stop.get().getTapTime());
-                    builder.duractionSecs((int)ChronoUnit.SECONDS.between(stop.get().getTapTime(), stop.get().getTapTime()));
+                    builder.duractionSecs((int)ChronoUnit.SECONDS.between(start.getTapTime(), stop.get().getTapTime()));
                     builder.chargeAmountCents(priceService.getPrice(start.getStopId(), stop.get().getStopId()));
                 }
                 else {
                     if (status == TripStatus.INCOMPLETE) {
                         builder.chargeAmountCents(priceService.getMax(start.getStopId()));
+                        builder.duractionSecs(0);
                     }
                 }
 
