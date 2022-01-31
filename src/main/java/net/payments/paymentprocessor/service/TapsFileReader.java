@@ -43,6 +43,24 @@ public class TapsFileReader {
 
     public TapsFileReader processFile() {
 
+        try (CSVReader csvReader = new CSVReaderBuilder(loadfile())
+                .withSkipLines(1)
+                .build();) {
+
+            String[] values = null;
+            while ((values = csvReader.readNext()) != null) {
+
+                tapsInputList.add(mappper(values));
+
+            }
+        }
+        catch (Exception ex) {
+
+            //Log excepton and exit
+            System.out.println(ex.getMessage());
+            throw new RuntimeException(ex);
+        }
+
         return this;
     }
 

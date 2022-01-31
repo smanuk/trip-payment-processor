@@ -50,7 +50,7 @@ public class TapsFileReaderTest {
     }
 
     @Test
-    void tapsFileReaderTest_imported_data_correct() {
+    void tapsFileReaderTest_imported_data_correct_first() {
 
         List<TapsInput> actual = cut.processFile().getTapsInputList();
 
@@ -65,6 +65,25 @@ public class TapsFileReaderTest {
                 () -> assertEquals("5500005555555559", input.getPan())
         );
     }
+
+
+    @Test
+    void tapsFileReaderTest_imported_data_correct_second() {
+
+        List<TapsInput> actual = cut.processFile().getTapsInputList();
+
+        TapsInput input = actual.get(1);
+        assertAll("Row 2 data points",
+                () -> assertEquals("2", input.getId()),
+                () -> assertEquals(getZdt("22-01-2018 13:05:00"), input.getTapTime()),
+                () -> assertEquals(TapType.OFF, input.getTapType()),
+                () -> assertEquals("Stop2", input.getStopId()),
+                () -> assertEquals("Company1", input.getCompanyId()),
+                () -> assertEquals("Bus37", input.getBusId()),
+                () -> assertEquals("5500005555555559", input.getPan())
+        );
+    }
+    
 
     private void setupData() {
 
