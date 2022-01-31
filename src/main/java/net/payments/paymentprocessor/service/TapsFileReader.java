@@ -45,6 +45,20 @@ public class TapsFileReader {
 
         return this;
     }
+
+    private TapsInput mappper(String[] values) {
+
+        return TapsInput.builder()
+                .id(values[0].trim())
+                .tapTime(getZdt(values[1].trim()))
+                .tapType(getTapType(values[2].trim()))
+                .stopId(values[3].trim())
+                .companyId(values[4].trim())
+                .busId(values[5].trim())
+                .pan(values[6].trim())
+                .build();
+    }
+
     private TapType getTapType(String tapName) {
 
         return TapType.valueOf(tapName);
